@@ -8,8 +8,8 @@ for a in range(n):
 print(arr)    
 for i in range(n+1):
     if i==n:
-        for j in range(n):
-            if j == n-1:
+        for j in range(n+1):
+            if j == n:
                 print("Max 2nd of array: ", max2)
             else:
                 if max1 > arr[j]:
