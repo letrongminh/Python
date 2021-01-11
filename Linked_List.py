@@ -102,6 +102,22 @@ class Singly_LinkedList:
 				previous_node.next = currently_node.next
 				return True
 
+	def delete_value(self, delete_value): #delete if value matching
+		currently_node = self.head
+		previous_node = None
+		if self.head is None:
+			return 'not exist Linked List'
+		else:
+			while currently_node != None:
+				if currently_node.value == delete_value:
+					if previous_node != None:
+						previous_node.next = currently_node.next
+					else:
+						self.head = self.head.next
+					return True
+				previous_node = currently_node
+				currently_node = currently_node.next
+
 test1 = Singly_LinkedList()
 test1.add(1)
 test1.add(2)
@@ -112,7 +128,13 @@ test1.add_by_index(5, 2)
 print(test1.to_list())
 test1.traverse()
 print(test1.searching(3))
-print('------')
+
+print('__________')
 
 test1.delete_node(3)
+print(test1.to_list())
+
+print('__________')
+
+test1.delete_value(4)
 print(test1.to_list())
