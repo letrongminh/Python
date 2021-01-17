@@ -42,7 +42,84 @@ class Circular_LinkedList(object):
 				previous_node.next = new_node
 				new_node.next = current_node
 				return True
-				
+	def traversal(self):
+		current_node = self.head
+		if self.head == None:
+			return "the linked list does not exist"
+		else:
+			while current_node.next != None:
+				print(current_node.value)
+				current_node = current_node.next
+				if current_node == self.tail.next: # prevent infinite loops 
+					break
+
+
+
+	def searching(self, value_seaching):
+		if self.head == None:
+			return "the linked list does not exist"
+		else:
+			current_node = self.head
+			i = 0
+			while current_node.next != None:
+				if current_node.value == value_seaching:
+					print('in this linked-list does exist value', value_seaching, 'at index', i)
+				current_node = current_node.next
+				i += 1
+				if current_node == self.tail.next:
+					break
+
+	def delete(self, index):
+		if self.head ==None: 
+			return "the linked list does not exist"
+		else:
+			i = 0
+			current_node = self.head
+			previous_node = None
+			while i < index and current_node.next:
+				previous_node = current_node
+				current_node = current_node.next
+				i+=1
+			if i == index:
+				if current_node.next == None: #checking here: self.head == self.tail ?
+					self.head = None
+					self.tail = None
+				else:
+					previous_node.next = current_node.next
+					#current_node = current_node.next
+			if current_node == self.tail.next:
+				self.tail = previous_node
+				previous_node.next = self.head
+
+	def delete_val(self, value_del):
+
+		if self.head ==None: 
+			return "the linked list does not exist"
+		else:
+			current_node = self.head
+			previous_node = None
+			while current_node.next != None:
+				if current_node.value == value_del:
+					if current_node.next == None: #checking here: self.head == self.tail ?
+						self.head = None
+						self.tail = None
+						break # if without break in the code, the loop is infinite
+					else:
+						previous_node.next = current_node.next
+						break # if without break in the code, the loop is infinite
+				if current_node == self.tail:
+					self.tail = previous_node
+					previous_node.next = self.head
+					break # if without break in the code, the loop is infinite
+				previous_node = current_node
+				current_node = current_node.next
+	def delete_entire(self):
+		if self.head == None:
+			print('The Linked List does not exist')
+		else:
+			self.head = None
+			self.tail = None
+
 	def to_list(self):
 		lst = []
 		checking_node = self.head
@@ -57,6 +134,9 @@ class Circular_LinkedList(object):
 					return lst
 		return lst
 
+
+
+
 CSLL = Circular_LinkedList()
 CSLL.create_Circular_LL(1)
 CSLL.create_Circular_LL(2)
@@ -69,3 +149,14 @@ CSLL.add_by_index('b', 3)
 
 
 print(CSLL.to_list())
+
+CSLL.traversal()
+CSLL.searching(4)
+print('_________')
+CSLL.delete(7)
+print('delete index = 7 in the linked list:', CSLL.to_list())
+
+print('_________')
+
+CSLL.delete_val(4)
+print('delete  value 4 in the linked list:', CSLL.to_list())
